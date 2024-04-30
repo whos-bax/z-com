@@ -1,9 +1,7 @@
-import { redirect } from "next/navigation";
+import LoginModal from "@/app/(beforeLogin)/_component/loginModal";
 
-export default function Login() {
-  return (
-    <main>
-      로그인 모달
-    </main>
-  )
+export default function Page() {
+    return (
+        <LoginModal />
+    )
 }
