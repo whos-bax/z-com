@@ -4,8 +4,8 @@ import styles from "./logoutButton.module.css";
 
 export default function LogoutButton() {
     const me = { // 임시로 내 정보 있는것처럼
-        id: 'zerohch0',
-        nickname: '제로초',
+        id: 'whosbax',
+        nickname: '호상박',
         image: '/5Udwvqim.jpg',
     }
 
