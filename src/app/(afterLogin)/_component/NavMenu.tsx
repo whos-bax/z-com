@@ -1,6 +1,6 @@
 "use client";
 
-import style from './navMenu.module.css';
+import styles from './navMenu.module.css';
 import {useSelectedLayoutSegment} from "next/navigation";
 import Link from "next/link";
 
@@ -16,7 +16,7 @@ export default function NavMenu() {
         <>
             <li>
                 <Link href="/home">
-                    <div className={style.navPill}>
+                    <div className={styles.navPill}>
                         {segment === 'home' ?
                             <>
                                 <svg width={26} viewBox="0 0 24 24" aria-hidden="true"
@@ -43,7 +43,7 @@ export default function NavMenu() {
             </li>
             <li>
                 <Link href="/explore">
-                    <div className={style.navPill}>
+                    <div className={styles.navPill}>
                         {segment && (['search', 'explore'].includes(segment)) ?
                             <>
                                 <svg width={26} viewBox="0 0 24 24" aria-hidden="true"
@@ -71,7 +71,7 @@ export default function NavMenu() {
             </li>
             <li>
                 <Link href="/messages">
-                    <div className={style.navPill}>
+                    <div className={styles.navPill}>
                         {segment === 'messages' ?
                             <>
                                 <svg width={26} viewBox="0 0 24 24" aria-hidden="true"
@@ -98,7 +98,7 @@ export default function NavMenu() {
             </li>
             {me?.id && <li>
                 <Link href={`/${me?.id}`}>
-                    <div className={style.navPill}>
+                    <div className={styles.navPill}>
                         {segment === me.id ? <>
                                 <svg width={26} viewBox="0 0 24 24" aria-hidden="true"
                                      className="r-18jsvk2 r-4qtqp9 r-yyyyoo r-lwhw9o r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-cnnz9e">

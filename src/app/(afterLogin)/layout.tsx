@@ -1,5 +1,5 @@
 import {ReactNode} from "react";
-import style from '@/app/(afterLogin)/layout.module.css';
+import styles from '@/app/(afterLogin)/layout.module.css';
 import Link from "next/link";
 import Image from "next/image";
 import ZLogo from '../../../public/zlogo.png';
@@ -10,12 +10,12 @@ import FollowRecommend from "@/app/(afterLogin)/_component/FollowRecommend";
 
 export default function AfterLoginLayout({children}: { children: ReactNode }) {
     return (
-        <div className={style.container}>
-            <header className={style.leftSectionWrapper}>
-                <section className={style.leftSection}>
-                    <div className={style.leftSectionFixed}>
-                        <Link className={style.logo} href="/home">
-                            <div className={style.logoPill}>
+        <div className={styles.container}>
+            <header className={styles.leftSectionWrapper}>
+                <section className={styles.leftSection}>
+                    <div className={styles.leftSectionFixed}>
+                        <Link className={styles.logo} href="/home">
+                            <div className={styles.logoPill}>
                                 <Image src={ZLogo} alt="z.com로고" width={40} height={40}/>
                             </div>
                         </Link>
@@ -23,18 +23,18 @@ export default function AfterLoginLayout({children}: { children: ReactNode }) {
                             <ul>
                                 <NavMenu/>
                             </ul>
-                            <Link href="/compose/tweet" className={style.postButton}>게시하기</Link>
+                            <Link href="/compose/tweet" className={styles.postButton}>게시하기</Link>
                         </nav>
                         <LogoutButton/>
                     </div>
                 </section>
             </header>
-            <div className={style.rightSectionWrapper}>
-                <div className={style.rightSectionInner}>
-                    <main className={style.main}>{children}</main>
-                    <section className={style.rightSection}>
+            <div className={styles.rightSectionWrapper}>
+                <div className={styles.rightSectionInner}>
+                    <main className={styles.main}>{children}</main>
+                    <section className={styles.rightSection}>
                         <div style={{marginBottom: 60, width: 'inherit'}}>
-                            <form className={style.search}>
+                            <form className={styles.search}>
                                 <svg width={20} viewBox="0 0 24 24" aria-hidden="true">
                                     <g>
                                         <path
@@ -45,7 +45,7 @@ export default function AfterLoginLayout({children}: { children: ReactNode }) {
                             </form>
                         </div>
                         <TrendSection/>
-                        <div className={style.followRecommend}>
+                        <div className={styles.followRecommend}>
                             <h3>팔로우 추천</h3>
                             <FollowRecommend/>
                             <FollowRecommend/>

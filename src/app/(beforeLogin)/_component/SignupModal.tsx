@@ -1,6 +1,6 @@
 "use client";
 
-import style from './signup.module.css';
+import styles from './signup.module.css';
 import { useRouter } from "next/navigation";
 import { ChangeEventHandler, FormEventHandler, useState } from "react";
 
@@ -48,10 +48,10 @@ export default function SignupModal() {
 
     return (
         <>
-            <div className={style.modalBackground}>
-                <div className={style.modal}>
-                    <div className={style.modalHeader}>
-                        <button className={style.closeButton} onClick={onClickClose}>
+            <div className={styles.modalBackground}>
+                <div className={styles.modal}>
+                    <div className={styles.modalHeader}>
+                        <button className={styles.closeButton} onClick={onClickClose}>
                             <svg width={24} viewBox="0 0 24 24" aria-hidden="true"
                                 className="r-18jsvk2 r-4qtqp9 r-yyyyoo r-z80fyv r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-19wmn03">
                                 <g>
@@ -63,37 +63,37 @@ export default function SignupModal() {
                         <div>계정을 생성하세요.</div>
                     </div>
                     <form>
-                        <div className={style.modalBody}>
-                            <div className={style.inputDiv}>
-                                <label className={style.inputLabel} htmlFor="id">아이디</label>
-                                <input id="id" className={style.input} type="text" placeholder=""
+                        <div className={styles.modalBody}>
+                            <div className={styles.inputDiv}>
+                                <label className={styles.inputLabel} htmlFor="id">아이디</label>
+                                <input id="id" className={styles.input} type="text" placeholder=""
                                     value={id}
                                     onChange={onChangeId}
                                 />
                             </div>
-                            <div className={style.inputDiv}>
-                                <label className={style.inputLabel} htmlFor="name">닉네임</label>
-                                <input id="name" className={style.input} type="text" placeholder=""
+                            <div className={styles.inputDiv}>
+                                <label className={styles.inputLabel} htmlFor="name">닉네임</label>
+                                <input id="name" className={styles.input} type="text" placeholder=""
                                     value={nickname}
                                     onChange={onChangeNickname}
                                 />
                             </div>
-                            <div className={style.inputDiv}>
-                                <label className={style.inputLabel} htmlFor="password">비밀번호</label>
-                                <input id="password" className={style.input} type="password" placeholder=""
+                            <div className={styles.inputDiv}>
+                                <label className={styles.inputLabel} htmlFor="password">비밀번호</label>
+                                <input id="password" className={styles.input} type="password" placeholder=""
                                     value={password}
                                     onChange={onChangePassword}
                                 />
                             </div>
-                            <div className={style.inputDiv}>
-                                <label className={style.inputLabel} htmlFor="image">프로필</label>
-                                <input id="image" className={style.input} type="file" accept="image/*"
+                            <div className={styles.inputDiv}>
+                                <label className={styles.inputLabel} htmlFor="image">프로필</label>
+                                <input id="image" className={styles.input} type="file" accept="image/*"
                                     onChange={onChangeImageFile}
                                 />
                             </div>
                         </div>
-                        <div className={style.modalFooter}>
-                            <button className={style.actionButton} disabled>가입하기</button>
+                        <div className={styles.modalFooter}>
+                            <button className={styles.actionButton} disabled>가입하기</button>
                         </div>
                     </form>
                 </div>
