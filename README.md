@@ -1,4 +1,6 @@
-#fake x.com ([x.com](https://twitter.com/))
+#Fake x.com
+([x.com](https://twitter.com/))
+
 ### x.com 홈페이지 분석하기
 
 - React@18
