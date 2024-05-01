@@ -2,7 +2,10 @@
 import styles from './post.module.css';
 import cx from 'classnames';
 
-export default function ActionButtons() {
+type Props = {
+    white?: boolean;
+}
+export default function ActionButtons({white}: Props) {
     const commented = true;
     const reposted = true;
     const liked = false;
@@ -16,7 +19,7 @@ export default function ActionButtons() {
 
     return (
         <div className={styles.actionButtons}>
-            <div className={cx(styles.commentButton, {[styles.commented]: commented})}>
+            <div className={cx(styles.commentButton, {[styles.commented]: commented}, white && styles.white)}>
                 <button onClick={onClickComment}>
                     <svg width={24} viewBox="0 0 24 24" aria-hidden="true">
                         <g>
@@ -27,7 +30,7 @@ export default function ActionButtons() {
                 </button>
                 <div className={styles.count}>{1 || ''}</div>
             </div>
-            <div className={cx(styles.repostButton, reposted && styles.reposted)}>
+            <div className={cx(styles.repostButton, reposted && styles.reposted, white && styles.white)}>
                 <button onClick={onClickRepost}>
                     <svg width={24} viewBox="0 0 24 24" aria-hidden="true">
                         <g>
@@ -38,7 +41,7 @@ export default function ActionButtons() {
                 </button>
                 <div className={styles.count}>{1 || ''}</div>
             </div>
-            <div className={cx([styles.heartButton, liked && styles.liked])}>
+            <div className={cx([styles.heartButton, liked && styles.liked, white && styles.white])}>
                 <button onClick={onClickHeart}>
                     <svg width={24} viewBox="0 0 24 24" aria-hidden="true">
                         <g>

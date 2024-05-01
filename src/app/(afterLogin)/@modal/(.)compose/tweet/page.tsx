@@ -2,6 +2,7 @@
 
 import styles from './modal.module.css';
 import {useRef, useState} from "react";
+import Image from "next/image";
 
 export default function TweetModal() {
     const [content, setContent] = useState();
@@ -36,7 +37,7 @@ export default function TweetModal() {
                     <div className={styles.modalBody}>
                         <div className={styles.postUserSection}>
                             <div className={styles.postUserImage}>
-                                <img src={me.image} alt={me.id}/>
+                                <Image src={me.image} alt={me.id} width={40} height={40}/>
                             </div>
                         </div>
                         <div className={styles.inputDiv}>
