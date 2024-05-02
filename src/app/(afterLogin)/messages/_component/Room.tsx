@@ -1,6 +1,6 @@
 "use client";
 
-import style from "@/app/(afterLogin)/messages/message.module.css";
+import styles from "@/app/(afterLogin)/messages/message.module.css";
 import {faker} from "@faker-js/faker";
 import dayjs from "dayjs";
 import {useRouter} from "next/navigation";
@@ -29,23 +29,23 @@ export default function Room() {
     };
 
     return (
-        <div className={style.room} onClickCapture={onClick}>
-            <div className={style.roomUserImage}>
+        <div className={styles.room} onClickCapture={onClick}>
+            <div className={styles.roomUserImage}>
                 <img src={faker.image.avatar()} alt="avartar"/>
             </div>
-            <div className={style.roomChatInfo}>
-                <div className={style.roomUserInfo}>
+            <div className={styles.roomChatInfo}>
+                <div className={styles.roomUserInfo}>
                     <b>{user.nickname}</b>
                     &nbsp;
                     <span>@{user.id}</span>
                     &nbsp;
                     ·
                     &nbsp;
-                    <span className={style.postDate}>
+                    <span className={styles.postDate}>
             {dayjs(user.Messages?.at(-1)?.createdAt).fromNow(true)}
           </span>
                 </div>
-                <div className={style.roomLastChat}>
+                <div className={styles.roomLastChat}>
                     {user.Messages?.at(-1)?.content}
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import style from './post.module.css';
+import styles from './post.module.css';
 import Link from "next/link";
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -20,24 +20,24 @@ export default function Post({ noImage, post }: Props) {
 
     return (
         <PostArticle post={target}>
-            <div className={style.postWrapper}>
-                <div className={style.postUserSection}>
-                    <Link href={`/${target.User.id}`} className={style.postUserImage}>
+            <div className={styles.postWrapper}>
+                <div className={styles.postUserSection}>
+                    <Link href={`/${target.User.id}`} className={styles.postUserImage}>
                         <img src={target.User.image} alt={target.User.nickname}/>
-                        <div className={style.postShade}/>
+                        <div className={styles.postShade}/>
                     </Link>
                 </div>
-                <div className={style.postBody}>
-                    <div className={style.postMeta}>
+                <div className={styles.postBody}>
+                    <div className={styles.postMeta}>
                         <Link href={`/${target.User.id}`}>
-                            <span className={style.postUserName}>{target.User.nickname}</span>
+                            <span className={styles.postUserName}>{target.User.nickname}</span>
                             &nbsp;
-                            <span className={style.postUserId}>@{target.User.id}</span>
+                            <span className={styles.postUserId}>@{target.User.id}</span>
                             &nbsp;
                             ·
                             &nbsp;
                         </Link>
-                        <span className={style.postDate}>{dayjs(target.createdAt).fromNow(true)}</span>
+                        <span className={styles.postDate}>{dayjs(target.createdAt).fromNow(true)}</span>
                     </div>
                     <div>{target.content}</div>
                     {!noImage && <div>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import style from "@/app/(afterLogin)/_component/post.module.css";
+import styles from "@/app/(afterLogin)/_component/post.module.css";
 import cx from 'classnames';
 
 type Props = {
@@ -23,7 +23,7 @@ export default function PostImages({post}: Props) {
         return (
             <Link
                 href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[0].imageId}`}
-                className={cx(style.postImageSection, style.oneImage)}
+                className={cx(styles.postImageSection, styles.oneImage)}
                 style={{backgroundImage: `url(${post.Images[0]?.link})`, backgroundSize: 'contain'}}
             >
                 <img src={post.Images[0]?.link} alt=""/>
@@ -33,7 +33,7 @@ export default function PostImages({post}: Props) {
     if (post.Images.length === 2) {
         return (
             <div
-                className={cx(style.postImageSection, style.twoImage)}
+                className={cx(styles.postImageSection, styles.twoImage)}
             >
                 <Link
                     href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[0].imageId}`}
@@ -49,7 +49,7 @@ export default function PostImages({post}: Props) {
     if (post.Images.length === 3) {
         return (
             <div
-                className={cx(style.postImageSection, style.threeImage)}
+                className={cx(styles.postImageSection, styles.threeImage)}
             >
                 <Link
                     href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[0].imageId}`}
@@ -71,7 +71,7 @@ export default function PostImages({post}: Props) {
     if (post.Images.length === 4) {
         return (
             <div
-                className={cx(style.postImageSection, style.fourImage)}
+                className={cx(styles.postImageSection, styles.fourImage)}
             >
                 <Link
                     href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[0].imageId}`}

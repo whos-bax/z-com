@@ -1,7 +1,7 @@
 import Post from "@/app/(afterLogin)/_component/Post";
 import CommentForm from "@/app/(afterLogin)/[username]/status/[id]/_component/CommentForm";
 import ActionButtons from "@/app/(afterLogin)/_component/ActionButtons";
-import style from './photoModal.module.css';
+import styles from './photoModal.module.css';
 import PhotoModalCloseButton
     from "@/app/(afterLogin)/@modal/[username]/status/[id]/photo/[photoId]/_component/PhotoModalCloseButton";
 import {faker} from "@faker-js/faker";
@@ -15,18 +15,18 @@ export default function PhotoPage() {
         }
     }
     return (
-        <div className={style.container}>
+        <div className={styles.container}>
             <PhotoModalCloseButton/>
-            <div className={style.imageZone}>
+            <div className={styles.imageZone}>
                 <img src={photo.link} alt={photo.Post?.content}/>
-                <div className={style.image} style={{backgroundImage: `url(${photo.link})`}}/>
-                <div className={style.buttonZone}>
-                    <div className={style.buttonInner}>
+                <div className={styles.image} style={{backgroundImage: `url(${photo.link})`}}/>
+                <div className={styles.buttonZone}>
+                    <div className={styles.buttonInner}>
                         <ActionButtons white/>
                     </div>
                 </div>
             </div>
-            <div className={style.commentZone}>
+            <div className={styles.commentZone}>
                 {/*<Post noImage/>*/}
                 <CommentForm/>
                 {/*<Post/>*/}

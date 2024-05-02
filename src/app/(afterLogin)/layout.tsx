@@ -1,5 +1,5 @@
 import {ReactNode} from "react";
-import style from '@/app/(afterLogin)/layout.module.css';
+import styles from '@/app/(afterLogin)/layout.module.css';
 import Link from "next/link";
 import Image from "next/image";
 import ZLogo from '../../../public/zlogo.png';
@@ -10,18 +10,22 @@ import FollowRecommend from "@/app/(afterLogin)/_component/FollowRecommend";
 import RightSearchZone from "@/app/(afterLogin)/_component/RightSearchZone";
 import {auth} from "@/auth";
 import RQProvider from "@/app/(afterLogin)/_component/RQProvider";
+import FollowRecommendSection from "@/app/(afterLogin)/_component/FollowRecommendSection";
 
-type Props = { children: ReactNode, modal: ReactNode }
+type Props = {
+    children: ReactNode,
+    modal: ReactNode
+}
 export default async function AfterLoginLayout({children, modal}: Props) {
     const session = await auth();
 
     return (
-        <div className={style.container}>
-            <header className={style.leftSectionWrapper}>
-                <section className={style.leftSection}>
-                    <div className={style.leftSectionFixed}>
-                        <Link className={style.logo} href={session?.user ? "/home" : '/'}>
-                            <div className={style.logoPill}>
+        <div className={styles.container}>
+            <header className={styles.leftSectionWrapper}>
+                <section className={styles.leftSection}>
+                    <div className={styles.leftSectionFixed}>
+                        <Link className={styles.logo} href={session?.user ? "/home" : '/'}>
+                            <div className={styles.logoPill}>
                                 <Image src={ZLogo} alt="z.com로고" width={40} height={40}/>
                             </div>
                         </Link>
@@ -30,7 +34,7 @@ export default async function AfterLoginLayout({children, modal}: Props) {
                                 <ul>
                                     <NavMenu/>
                                 </ul>
-                                <Link href="/compose/tweet" className={style.postButton}>
+                                <Link href="/compose/tweet" className={styles.postButton}>
                                     <span>게시하기</span>
                                     <svg viewBox="0 0 24 24" aria-hidden="true"
                                          className="r-jwli3a r-4qtqp9 r-yyyyoo r-1472mwg r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-lrsllp">
@@ -47,17 +51,15 @@ export default async function AfterLoginLayout({children, modal}: Props) {
                 </section>
             </header>
             <RQProvider>
-                <div className={style.rightSectionWrapper}>
-                    <div className={style.rightSectionInner}>
-                        <main className={style.main}>{children}</main>
-                        <section className={style.rightSection}>
+                <div className={styles.rightSectionWrapper}>
+                    <div className={styles.rightSectionInner}>
+                        <main className={styles.main}>{children}</main>
+                        <section className={styles.rightSection}>
                             <RightSearchZone/>
                             <TrendSection/>
-                            <div className={style.followRecommend}>
+                            <div className={styles.followRecommend}>
                                 <h3>팔로우 추천</h3>
-                                <FollowRecommend/>
-                                <FollowRecommend/>
-                                <FollowRecommend/>
+                                <FollowRecommendSection/>
                             </div>
                         </section>
                     </div>

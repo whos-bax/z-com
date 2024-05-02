@@ -1,7 +1,7 @@
 "use client";
 
 import {useRef, useState} from "react";
-import style from './commentForm.module.css';
+import styles from './commentForm.module.css';
 
 export default function CommentForm() {
     const [content, setContent] = useState('');
@@ -18,19 +18,19 @@ export default function CommentForm() {
     };
 
     return (
-        <form className={style.postForm} onSubmit={onSubmit}>
-            <div className={style.postUserSection}>
-                <div className={style.postUserImage}>
+        <form className={styles.postForm} onSubmit={onSubmit}>
+            <div className={styles.postUserSection}>
+                <div className={styles.postUserImage}>
                     <img src={me.image} alt={me.id}/>
                 </div>
             </div>
-            <div className={style.postInputSection}>
+            <div className={styles.postInputSection}>
                 <textarea value={content} onChange={onChange} placeholder="답글 게시하기"/>
-                <div className={style.postButtonSection}>
-                    <div className={style.footerButtons}>
-                        <div className={style.footerButtonLeft}>
+                <div className={styles.postButtonSection}>
+                    <div className={styles.footerButtons}>
+                        <div className={styles.footerButtonLeft}>
                             <input type="file" name="imageFiles" multiple hidden ref={imageRef}/>
-                            <button className={style.uploadButton} type="button" onClick={onClickButton}>
+                            <button className={styles.uploadButton} type="button" onClick={onClickButton}>
                                 <svg width={24} viewBox="0 0 24 24" aria-hidden="true">
                                     <g>
                                         <path
@@ -39,7 +39,7 @@ export default function CommentForm() {
                                 </svg>
                             </button>
                         </div>
-                        <button className={style.actionButton} disabled={!content}>답글</button>
+                        <button className={styles.actionButton} disabled={!content}>답글</button>
                     </div>
                 </div>
             </div>

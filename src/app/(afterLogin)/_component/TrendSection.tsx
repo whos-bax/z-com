@@ -4,32 +4,37 @@ import styles from './trendSection.module.css';
 import Trend from "@/app/(afterLogin)/_component/Trend";
 import {usePathname} from "next/navigation";
 import {useSession} from "next-auth/react";
+import {useQuery} from "@tanstack/react-query";
+import {getTrends} from "@/app/(afterLogin)/_lib/getTrends";
+import {Hashtag} from "@/model/Hashtag";
 
 export default function TrendSection() {
-    const pathname = usePathname();
-    const {data} = useSession();
-    if (pathname === "/explore") return null;
+    const { data: session } = useSession();
+    const { data } = useQuery<Hashtag[]>({
+        queryKey: ['trends'],
+        queryFn: getTrends,
+        staleTime: 60 * 1000, // fresh -> stale, 5분이라는 기준
+        gcTime: 300 * 1000,
+        enabled: !!session?.user
+    })
 
-    if (data?.user) {
+    const pathname = usePathname();
+    if (pathname === '/explore') return null;
+    if (session?.user) {
         return (
             <div className={styles.trendBg}>
                 <div className={styles.trend}>
                     <h3>나를 위한 트렌드</h3>
-                    {Array.from({length: 10}).map((_, index) => (
-                        <div key={`trend_${index}`}>
-                            <Trend/>
-                        </div>
-                    ))}
+                    {data?.map((trend) => <Trend trend={trend} key={trend.tagId} />)}
                 </div>
             </div>
-        )
-    } else {
-        return (
-            <div className={styles.trendBg}>
-                <div className={styles.noTrend}>
-                    트렌드를 가져올 수 없습니다.
-                </div>
-            </div>
-        )
+        );
     }
+    return (
+        <div className={styles.trendBg}>
+            <div className={styles.noTrend}>
+                트렌드를 가져올 수 없습니다.
+            </div>
+        </div>
+    )
 }

@@ -26,12 +26,12 @@ export default function Profile() {
           <button className={styles.followButton}>팔로우</button>
         </div>
         <div>
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
+          {/*<Post />*/}
+          {/*<Post />*/}
+          {/*<Post />*/}
+          {/*<Post />*/}
+          {/*<Post />*/}
+          {/*<Post />*/}
         </div>
       </main>
   )
