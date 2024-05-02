@@ -1,38 +1,28 @@
 import styles from './profile.module.css';
-import Post from "@/app/(afterLogin)/_component/Post";
-import BackButton from "@/app/(afterLogin)/_component/BackButton";
-import Image from "next/image";
-export default function Profile() {
-  const user = {
-    id: 'whosbax',
-    nickname: '호상박',
-    image: '/5Udwvqim.jpg'
-  };
+import {dehydrate, HydrationBoundary, QueryClient} from "@tanstack/react-query";
+import UserPosts from "@/app/(afterLogin)/[username]/_component/UserPosts";
+import UserInfo from "@/app/(afterLogin)/[username]/_component/UserInfo";
+import {getUser} from "@/app/(afterLogin)/[username]/_lib/getUser";
+import {getUserPosts} from "@/app/(afterLogin)/[username]/_lib/getUserPosts";
 
-  return (
-      <main className={styles.main}>
-        <div className={styles.header}>
-          <BackButton />
-          <h3 className={styles.headerTitle}>{user.nickname}</h3>
-        </div>
-        <div className={styles.userZone}>
-          <div className={styles.userImage}>
-            <Image src={user.image} alt={user.id} width={134} height={134}/>
-          </div>
-          <div className={styles.userName}>
-            <div>{user.nickname}</div>
-            <div>@{user.id}</div>
-          </div>
-          <button className={styles.followButton}>팔로우</button>
-        </div>
-        <div>
-          {/*<Post />*/}
-          {/*<Post />*/}
-          {/*<Post />*/}
-          {/*<Post />*/}
-          {/*<Post />*/}
-          {/*<Post />*/}
-        </div>
-      </main>
-  )
+type Props = {
+    params: { username: string },
+}
+export default async function Profile({params}: Props) {
+    const {username} = params;
+    const queryClient = new QueryClient();
+    await queryClient.prefetchQuery({queryKey: ['users', username], queryFn: getUser})
+    await queryClient.prefetchQuery({queryKey: ['posts', 'users', username], queryFn: getUserPosts})
+    const dehydratedState = dehydrate(queryClient);
+
+    return (
+        <main className={styles.main}>
+            <HydrationBoundary state={dehydratedState}>
+                <UserInfo username={username} />
+                <div>
+                    <UserPosts username={username} />
+                </div>
+            </HydrationBoundary>
+        </main>
+    )
 }
