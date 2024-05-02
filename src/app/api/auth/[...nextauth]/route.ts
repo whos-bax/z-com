@@ -1,3 +1,1 @@
-export function GET() {
-
-}
+export { GET, POST } from '@/auth';

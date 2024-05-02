@@ -1,7 +1,7 @@
 "use server";
 
 import {redirect} from "next/navigation";
-// import {signIn} from "@/auth";
+import {signIn} from "@/auth";
 
 export default async (prevState: any, formData: FormData) => {
   if (!formData.get('id') || !(formData.get('id') as string)?.trim()) {
@@ -30,11 +30,11 @@ export default async (prevState: any, formData: FormData) => {
     }
     console.log(await response.json())
     shouldRedirect = true;
-    // await signIn("credentials", {
-    //   username: formData.get('id'),
-    //   password: formData.get('password'),
-    //   redirect: false,
-    // })
+    await signIn("credentials", {
+      username: formData.get('id'),
+      password: formData.get('password'),
+      redirect: false,
+    })
   } catch (err) {
     console.error(err);
     return { message: null };
