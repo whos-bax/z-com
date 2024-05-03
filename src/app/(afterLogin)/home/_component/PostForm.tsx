@@ -6,6 +6,8 @@ import Image from "next/image";
 import {useSession} from "next-auth/react";
 import {Session} from "@auth/core/types";
 import TextareaAutosize from 'react-textarea-autosize';
+import {useQueryClient} from "@tanstack/react-query";
+import {Post} from "@/model/Post";
 
 type Props = {
     me: Session | null;
@@ -16,23 +18,52 @@ export default function PostForm({me}: Props) {
     const [content, setContent] = useState('');
     // const {data: me} = useSession();
 
+    const queryClient = useQueryClient();
+
     const onChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
         setContent(e.target.value);
     }
 
-    const onSubmit: FormEventHandler = (e) => {
+    const onSubmit: FormEventHandler = async (e) => {
         e.preventDefault();
         const formData = new FormData();
+        console.log(content, preview)
         formData.append('content', content);
         preview.forEach((p) => {
             p && formData.append('images', p.file);
         })
-        // formData.append('images',)
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`, {
-            method: 'posst',
-            credentials: "include",
-            body: formData,
-        })
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`, {
+                method: 'post',
+                credentials: "include",
+                body: formData,
+            })
+            if (response.status === 201) {
+                setContent("");
+                setPreview([]);
+                const newPost = await response.json();
+                queryClient.setQueryData(['posts', 'recommends'], (prevData: { pages: Post[][] }) => {
+                    const shallow = {
+                        ...prevData,
+                        pages: [...prevData.pages],
+                    };
+                    shallow.pages[0] = [...shallow.pages[0]];
+                    shallow.pages[0].unshift(newPost);
+                    return shallow;
+                })
+                queryClient.setQueryData(['posts', 'followings'], (prevData: { pages: Post[][] }) => {
+                    const shallow = {
+                        ...prevData,
+                        pages: [...prevData.pages],
+                    };
+                    shallow.pages[0] = [...shallow.pages[0]];
+                    shallow.pages[0].unshift(newPost);
+                    return shallow;
+                })
+            }
+        } catch (e) {
+            alert('업로드 중 에러가 발생했습니다.')
+        }
     }
 
     const onClickButton = () => {
@@ -81,7 +112,8 @@ export default function PostForm({me}: Props) {
                 <div style={{display: 'flex'}}>
                     {preview.map((v, index) => (
                         v && (<div key={index} style={{flex: 1}} onClick={onRemoveImage(index)}>
-                            <img src={v.dataUrl} alt="미리보기" style={{ width: '100%', objectFit: 'contain', maxHeight: 100 }} />
+                            <img src={v.dataUrl} alt="미리보기"
+                                 style={{width: '100%', objectFit: 'contain', maxHeight: 100}}/>
                         </div>)
                     ))}
                 </div>
