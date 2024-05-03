@@ -13,7 +13,7 @@ export default function TrendSection() {
     const { data } = useQuery<Hashtag[]>({
         queryKey: ['trends'],
         queryFn: getTrends,
-        staleTime: 60 * 1000, // fresh -> stale, 5분이라는 기준
+        staleTime: 6 * 1000, // fresh -> stale, 5분이라는 기준
         gcTime: 300 * 1000,
         enabled: !!session?.user
     })

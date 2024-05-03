@@ -1,12 +1,15 @@
 "use client";
 
-import {useQuery} from "@tanstack/react-query";
+import {useQuery, useSuspenseQuery} from "@tanstack/react-query";
 import Post from "@/app/(afterLogin)/_component/Post";
 import {Post as IPost} from '@/model/Post'
 import {getFollowingPosts} from "@/app/(afterLogin)/home/_lib/getFollowingPosts";
+import styles from "@/app/(afterLogin)/home/home.module.css";
+import Loading from "@/app/(afterLogin)/home/loading";
 
 export default function FollowingPosts() {
-    const {data} = useQuery<IPost[]>({
+    // const {data, isPending} = useQuery<IPost[]>({
+    const {data} = useSuspenseQuery<IPost[]>({
         queryKey: ['posts', 'followings'],
         queryFn: getFollowingPosts,
         staleTime: 60 * 100, // fresh -> stale
@@ -14,8 +17,13 @@ export default function FollowingPosts() {
         // initialData: () => [] // 초기 데이터 (reset)
     })
 
-    return data?.map((post) => (
-        <Post key={post.postId} post={post}/>
-    ))
+    // useSuspenseQuery
+    // if (isPending) {
+    //     return (
+    //         <Loading/>
+    //     )
+    // }
+
+    return data?.map((post) => <Post key={post.postId} post={post}/>)
 }
 

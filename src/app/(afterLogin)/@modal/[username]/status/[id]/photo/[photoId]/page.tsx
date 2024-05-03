@@ -1,6 +1,6 @@
 import CommentForm from "@/app/(afterLogin)/[username]/status/[id]/_component/CommentForm";
 import ActionButtons from "@/app/(afterLogin)/_component/ActionButtons";
-import style from './photoModal.module.css';
+import styles from './photoModal.module.css';
 import PhotoModalCloseButton
     from "@/app/(afterLogin)/@modal/[username]/status/[id]/photo/[photoId]/_component/PhotoModalCloseButton";
 import {dehydrate, HydrationBoundary, QueryClient} from "@tanstack/react-query";
@@ -22,11 +22,11 @@ export default async function Default({params}: Props) {
     const dehydratedState = dehydrate(queryClient)
 
     return (
-        <div className={style.container}>
+        <div className={styles.container}>
             <HydrationBoundary state={dehydratedState}>
                 <PhotoModalCloseButton/>
                 <ImageZone id={id} />
-                <div className={style.commentZone}>
+                <div className={styles.commentZone}>
                     <SinglePost id={id} noImage />
                     <CommentForm id={id} />
                     <Comments id={id} />

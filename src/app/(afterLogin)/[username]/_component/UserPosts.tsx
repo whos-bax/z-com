@@ -12,7 +12,7 @@ export default function UserPosts({username}: Props) {
     const {data} = useQuery<IPost[], Object, IPost[], [_1: string, _2: string, _3: string]>({
         queryKey: ['posts', 'users', username],
         queryFn: getUserPosts,
-        staleTime: 60 * 1000, // fresh -> stale, 5분이라는 기준
+        staleTime: 6 * 1000, // fresh -> stale, 5분이라는 기준
         gcTime: 300 * 1000,
     });
     const queryClient = useQueryClient();

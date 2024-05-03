@@ -13,7 +13,7 @@ export default function UserInfo({username}: Props) {
     const {data: user, error, isLoading} = useQuery<User, Object, User, [_1: string, _2: string]>({
         queryKey: ['users', username],
         queryFn: getUser,
-        staleTime: 60 * 1000, // fresh -> stale, 5분이라는 기준
+        staleTime: 6 * 1000, // fresh -> stale, 5분이라는 기준
         gcTime: 300 * 1000,
     });
     console.log('error');

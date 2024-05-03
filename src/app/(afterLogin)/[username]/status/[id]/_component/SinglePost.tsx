@@ -13,7 +13,7 @@ export default function SinglePost({id, noImage}: Props) {
     const {data: post, error} = useQuery<IPost, Object, IPost, [_1: string, _2: string]>({
         queryKey: ['posts', id],
         queryFn: getSinglePost,
-        staleTime: 60 * 1000, // fresh -> stale, 5분이라는 기준
+        staleTime: 6 * 1000, // fresh -> stale, 5분이라는 기준
         gcTime: 300 * 1000,
     });
     if (error) {

@@ -8,7 +8,7 @@ import {useSession} from "next-auth/react";
 export default function TweetModal() {
     const [content, setContent] = useState();
     const imageRef = useRef<HTMLInputElement>(null);
-    const {data:me} = useSession();
+    const {data: me} = useSession();
     const onSubmit = () => {
     };
     const onClickClose = () => {
@@ -34,7 +34,8 @@ export default function TweetModal() {
                     <div className={styles.modalBody}>
                         <div className={styles.postUserSection}>
                             <div className={styles.postUserImage}>
-                                <Image src={me?.user?.image as string} alt={me?.user?.email as string} width={40} height={40}/>
+                                <img src={me?.user?.image as string} alt={me?.user?.email as string} width={40}
+                                     height={40}/>
                             </div>
                         </div>
                         <div className={styles.inputDiv}>
