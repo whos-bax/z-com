@@ -3,10 +3,14 @@
 import styles from "./logoutButton.module.css";
 import {useRouter} from "next/navigation";
 import {signOut, useSession} from "next-auth/react";
+import {Session} from "@auth/core/types";
 
-export default function LogoutButton() {
+type Props = {
+    me: Session | null;
+}
+export default function LogoutButton({me}: Props) {
     const router = useRouter();
-    const {data: me} = useSession();
+    // const {data: me} = useSession();
 
     // const me = { // 임시로 내 정보 있는것처럼
     //     id: 'whosbax',

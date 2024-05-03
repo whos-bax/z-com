@@ -8,16 +8,18 @@ import TabDecider from "@/app/(afterLogin)/home/_component/TabDecider";
 import {Suspense} from "react";
 import Loading from "@/app/(afterLogin)/home/loading";
 import TabDeciderSuspense from "@/app/(afterLogin)/home/_component/TabDeciderSuspense";
+import {auth} from "@/auth";
 
 // 1. page.tsx -> loading.tsx
 // 2. 서버 Suspense -> fallback
 // 3. react-query -> isPending
 export default async function Home() {
+    const session = await auth();
     return (
         <main className={styles.main}>
             <TabProvider>
                 <Tab/>
-                <PostForm/>
+                <PostForm me={session}/>
                 {/* 최적화 */}
                 <Suspense fallback={<Loading/>}>
                     <TabDeciderSuspense/>

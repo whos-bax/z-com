@@ -4,11 +4,15 @@ import {ChangeEventHandler, FormEventHandler, useRef, useState} from "react";
 import styles from './postForm.module.css';
 import Image from "next/image";
 import {useSession} from "next-auth/react";
+import {Session} from "@auth/core/types";
 
-export default function PostForm() {
+type Props = {
+    me: Session | null;
+}
+export default function PostForm({me}: Props) {
     const imageRef = useRef<HTMLInputElement>(null);
     const [content, setContent] = useState('');
-    const {data: me} = useSession();
+    // const {data: me} = useSession();
 
     const onChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
         setContent(e.target.value);
@@ -26,7 +30,7 @@ export default function PostForm() {
         <form className={styles.postForm} onSubmit={onSubmit}>
             <div className={styles.postUserSection}>
                 <div className={styles.postUserImage}>
-                    <img src={me?.user?.image as string} alt={me?.user?.email as string} width={40} height={40} />
+                    <img src={me?.user?.image as string} alt={me?.user?.email as string} width={40} height={40}/>
                 </div>
             </div>
             <div className={styles.postInputSection}>
@@ -34,7 +38,7 @@ export default function PostForm() {
                 <div className={styles.postButtonSection}>
                     <div className={styles.footerButtons}>
                         <div className={styles.footerButtonLeft}>
-                            <input type="file" name="imageFiles" multiple hidden ref={imageRef} />
+                            <input type="file" name="imageFiles" multiple hidden ref={imageRef}/>
                             <button className={styles.uploadButton} type="button" onClick={onClickButton}>
                                 <svg width={24} viewBox="0 0 24 24" aria-hidden="true">
                                     <g>

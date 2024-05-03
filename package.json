@@ -19,7 +19,8 @@
     "next-auth": "^5.0.0-beta.17",
     "react": "^18",
     "react-dom": "^18",
-    "react-intersection-observer": "^9.10.1"
+    "react-intersection-observer": "^9.10.1",
+    "react-textarea-autosize": "^8.5.3"
   },
   "devDependencies": {
     "@mswjs/http-middleware": "^0.10.1",
