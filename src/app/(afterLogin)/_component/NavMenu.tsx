@@ -3,14 +3,13 @@
 import styles from './navMenu.module.css';
 import {useSelectedLayoutSegment} from "next/navigation";
 import Link from "next/link";
+import {useSession} from "next-auth/react";
 
 export default function NavMenu() {
+    const {data:me} = useSession();
     const segment = useSelectedLayoutSegment();
     // const segments = useSelectedLayoutSegments(); -> 자식까지 보고 싶은 경우 ex) ['compose', 'tweet']
     console.log(segment);
-    const me = { // 임시로 내 정보 있는것처럼
-        id: 'whosbax'
-    }
 
     return (
         <>
@@ -96,10 +95,10 @@ export default function NavMenu() {
                     </div>
                 </Link>
             </li>
-            {me?.id && <li>
-                <Link href={`/${me?.id}`}>
+            {me?.user?.email && <li>
+                <Link href={`/${me.user.email}`}>
                     <div className={styles.navPill}>
-                        {segment === me.id ? <>
+                        {segment === me.user.email ? <>
                                 <svg width={26} viewBox="0 0 24 24" aria-hidden="true"
                                      className="r-18jsvk2 r-4qtqp9 r-yyyyoo r-lwhw9o r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-cnnz9e">
                                     <g>

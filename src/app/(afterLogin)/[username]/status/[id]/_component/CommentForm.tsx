@@ -1,36 +1,45 @@
 "use client";
 
 import {useRef, useState} from "react";
-import styles from './commentForm.module.css';
+import style from './commentForm.module.css';
+import {useQueryClient} from "@tanstack/react-query";
+import {useSession} from "next-auth/react";
 
-export default function CommentForm() {
+type Props = {
+    id: string;
+}
+export default function CommentForm({id}: Props) {
     const [content, setContent] = useState('');
     const imageRef = useRef<HTMLInputElement>(null);
+    const {data: me} = useSession();
+
     const onClickButton = () => {
     }
     const onSubmit = () => {
     }
     const onChange = () => {
     }
-    const me = {
-        id: 'zerohch0',
-        image: '/5Udwvqim.jpg'
-    };
 
+    const queryClient = useQueryClient();
+    const post = queryClient.getQueryData(['posts', id]);
+    console.log('post', post, id);
+    if (!post) {
+        return null;
+    }
     return (
-        <form className={styles.postForm} onSubmit={onSubmit}>
-            <div className={styles.postUserSection}>
-                <div className={styles.postUserImage}>
-                    <img src={me.image} alt={me.id}/>
+        <form className={style.postForm} onSubmit={onSubmit}>
+            <div className={style.postUserSection}>
+                <div className={style.postUserImage}>
+                    <img src={me?.user?.image as string} alt={me?.user?.email as string}/>
                 </div>
             </div>
-            <div className={styles.postInputSection}>
+            <div className={style.postInputSection}>
                 <textarea value={content} onChange={onChange} placeholder="답글 게시하기"/>
-                <div className={styles.postButtonSection}>
-                    <div className={styles.footerButtons}>
-                        <div className={styles.footerButtonLeft}>
+                <div className={style.postButtonSection}>
+                    <div className={style.footerButtons}>
+                        <div className={style.footerButtonLeft}>
                             <input type="file" name="imageFiles" multiple hidden ref={imageRef}/>
-                            <button className={styles.uploadButton} type="button" onClick={onClickButton}>
+                            <button className={style.uploadButton} type="button" onClick={onClickButton}>
                                 <svg width={24} viewBox="0 0 24 24" aria-hidden="true">
                                     <g>
                                         <path
@@ -39,7 +48,7 @@ export default function CommentForm() {
                                 </svg>
                             </button>
                         </div>
-                        <button className={styles.actionButton} disabled={!content}>답글</button>
+                        <button className={style.actionButton} disabled={!content}>답글</button>
                     </div>
                 </div>
             </div>
