@@ -1,6 +1,6 @@
 
 interface UserID {
-    userId: string;
+    id: string;
 }
 export interface User {
     id: string;
