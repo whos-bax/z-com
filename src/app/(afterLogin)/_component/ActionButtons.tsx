@@ -238,9 +238,32 @@ export default function ActionButtons({white, post}: Props) {
         }
     });
 
-    const onClickComment = () => {
+    const onClickComment: MouseEventHandler<HTMLButtonElement> = (e) => {
+        e.stopPropagation();
+
+        // modalStore.setMode('comment');
+        // modalStore.setData(post);
+        // router.push('/compose/tweet');
+        const formData = new FormData();
+        formData.append('content', '답글 테스트');
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${post.postId}/comments`, {
+            method: 'post',
+            credentials: 'include',
+            body: formData
+        });
     }
-    const onClickRepost = () => {
+
+    const onClickRepost: MouseEventHandler<HTMLButtonElement> = (e) => {
+        e.stopPropagation();
+        if (!reposted) {
+            const formData = new FormData();
+            formData.append('content', '재게시 테스트');
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${post.postId}/reposts`, {
+                method: 'post',
+                credentials: 'include',
+                body: formData
+            });
+        }
     }
 
     const onClickHeart: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -265,7 +288,7 @@ export default function ActionButtons({white, post}: Props) {
                         </g>
                     </svg>
                 </button>
-                <div className={styles.count}>{post._count.Comments || ''}</div>
+                <div className={styles.count}>{post._count?.Comments || ''}</div>
             </div>
             <div className={cx(styles.repostButton, reposted && styles.reposted, white && styles.white)}>
                 <button onClick={onClickRepost}>
@@ -276,7 +299,7 @@ export default function ActionButtons({white, post}: Props) {
                         </g>
                     </svg>
                 </button>
-                <div className={styles.count}>{post._count.Reposts || ''}</div>
+                <div className={styles.count}>{post._count?.Reposts || ''}</div>
             </div>
             <div className={cx([styles.heartButton, liked && styles.liked, white && styles.white])}>
                 <button onClick={onClickHeart}>
@@ -287,7 +310,7 @@ export default function ActionButtons({white, post}: Props) {
                         </g>
                     </svg>
                 </button>
-                <div className={styles.count}>{post._count.Hearts || ''}</div>
+                <div className={styles.count}>{post._count?.Hearts || ''}</div>
             </div>
         </div>
     )
