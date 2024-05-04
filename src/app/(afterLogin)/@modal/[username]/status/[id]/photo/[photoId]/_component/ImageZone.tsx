@@ -27,7 +27,7 @@ export default function ImageZone({id}: Props) {
             <div className={styles.image} style={{backgroundImage: `url(${post.Images[0].link})`}}/>
             <div className={styles.buttonZone}>
                 <div className={styles.buttonInner}>
-                    <ActionButtons white/>
+                    <ActionButtons white post={post}/>
                 </div>
             </div>
         </div>
