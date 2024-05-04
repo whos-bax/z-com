@@ -9,11 +9,13 @@ import {useSession} from "next-auth/react";
 import cx from "classnames";
 import {MouseEventHandler} from "react";
 import {useRouter} from "next/navigation";
+import {Session} from "@auth/core/types";
 
 type Props = {
     username: string;
+    session: Session | null;
 }
-export default function UserInfo({username}: Props) {
+export default function UserInfo({username, session}: Props) {
     const router = useRouter();
     const queryClient = useQueryClient();
     const {data: user, error, isLoading} = useQuery<User, Object, User, [_1: string, _2: string]>({
@@ -22,7 +24,7 @@ export default function UserInfo({username}: Props) {
         staleTime: 6 * 1000, // fresh -> stale, 5분이라는 기준
         gcTime: 300 * 1000,
     });
-    const {data: session} = useSession();
+    // const {data: session} = useSession(); // 세션을 초기부터 수정하기 위해 props 로 내려받음
 
     const follow = useMutation({
         mutationFn: (userId: string) => {
