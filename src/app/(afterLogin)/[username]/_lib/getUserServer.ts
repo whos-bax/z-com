@@ -2,8 +2,9 @@ import {QueryFunction} from "@tanstack/query-core";
 import {User} from "@/model/User";
 import {cookies} from "next/headers";
 
-export const getUserServer: QueryFunction<User, [_1: string, _2: string]>
-    = async ({queryKey}) => {
+// export const getUserServer: QueryFunction<User, [_1: string, _2: string]>
+export const getUserServer
+    = async ({queryKey}: { queryKey: [string, string] }) => {
     const [_1, username] = queryKey;
     const res = await fetch(`http://localhost:9090/api/users/${username}`, {
         next: {
