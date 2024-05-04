@@ -25,7 +25,6 @@ export default function ActionButtons({white, post}: Props) {
                 method: 'post',
                 credentials: 'include'
             })
-
         },
         onMutate: () => {
             const queryCache = queryClient.getQueryCache();
@@ -237,7 +236,7 @@ export default function ActionButtons({white, post}: Props) {
         onSettled: () => {
 
         }
-    })
+    });
 
     const onClickComment = () => {
     }
