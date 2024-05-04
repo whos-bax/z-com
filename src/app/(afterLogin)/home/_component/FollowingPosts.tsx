@@ -24,6 +24,8 @@ export default function FollowingPosts() {
     //     )
     // }
 
-    return data?.map((post) => <Post key={post.postId} post={post}/>)
+    return data?.map((post) => (
+        <Post key={post.postId} post={post}/>
+    ))
 }
 
