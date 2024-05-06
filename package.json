@@ -21,7 +21,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-intersection-observer": "^9.10.1",
-    "react-textarea-autosize": "^8.5.3"
+    "react-textarea-autosize": "^8.5.3",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@mswjs/http-middleware": "^0.10.1",
