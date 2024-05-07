@@ -31,7 +31,7 @@ export default function Room() {
     return (
         <div className={styles.room} onClickCapture={onClick}>
             <div className={styles.roomUserImage}>
-                <img src={faker.image.avatar()} alt="avartar"/>
+                <img src={faker.image.avatar()} alt="avartar" width={40} height={40}/>
             </div>
             <div className={styles.roomChatInfo}>
                 <div className={styles.roomUserInfo}>

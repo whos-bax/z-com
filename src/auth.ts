@@ -9,6 +9,7 @@ export const {
     auth,
     signIn,
 } = NextAuth({
+    trustHost: true,
     pages: {
         signIn: '/i/flow/login',
         newUser: '/i/flow/signup',
