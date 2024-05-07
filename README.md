@@ -9,3 +9,4 @@
 - MSW@2
 - socket.io@4
 - zustand
+- aws 프론트서버 배포까지 반영
