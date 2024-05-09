@@ -2,7 +2,7 @@
 
 import styles from './messageForm.module.css';
 import TextareaAutosize from "react-textarea-autosize";
-import {ChangeEventHandler, FormEventHandler, useEffect, useState} from "react";
+import {ChangeEventHandler, FormEventHandler, KeyboardEventHandler, useEffect, useState} from "react";
 import useSocket from "@/app/(afterLogin)/messages/[room]/_lib/useSocket";
 import {useSession} from "next-auth/react";
 import {InfiniteData, useQueryClient} from "@tanstack/react-query";
@@ -19,17 +19,14 @@ export default function MessageForm({id}: Props) {
     const [socket] = useSocket();
     const {data: session} = useSession();
     const queryClient = useQueryClient();
-
     const onChangeContent: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
-        setContent(e.target.value);
-    };
-
-    const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-        e.preventDefault();
+        setContent(e.target.value)
+    }
+    const onSubmit = () => {
         if (!session?.user?.email) {
             return;
         }
-        const ids = [session.user.email, id];
+        const ids = [session?.user?.email, id];
         ids.sort();
         // socket.io
         socket?.emit('sendMessage', {
@@ -46,9 +43,9 @@ export default function MessageForm({id}: Props) {
             const newMessages = {
                 ...exMessages,
                 pages: [
-                    ...exMessages.pages,
+                    ...exMessages.pages
                 ],
-            }
+            };
             const lastPage = newMessages.pages.at(-1);
             const newLastPage = lastPage ? [...lastPage] : [];
             let lastMessageId = lastPage?.at(-1)?.messageId;
@@ -61,29 +58,35 @@ export default function MessageForm({id}: Props) {
                 createdAt: new Date(),
             })
             newMessages.pages[newMessages.pages.length - 1] = newLastPage;
-            queryClient.setQueryData(['rooms', {senderId: session?.user?.email, receiverId: id}, 'messages'], newMessages);
+            queryClient.setQueryData(['rooms', {
+                senderId: session?.user?.email,
+                receiverId: id
+            }, 'messages'], newMessages);
             setGoDown(true);
         }
         setContent('');
-    };
+    }
 
-    useEffect(() => {
-        socket?.on('receiveMessage', (data) => {
-            console.log(data);
-        });
-        return () => {
-            socket?.off('receiveMessage');
+    const onEnter: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
+        console.log(e.key === 'Enter', e);
+        if (e.key === 'Enter') {
+            if (e.shiftKey) {
+                return;
+            }
+            e.preventDefault();
+            if (!content?.trim()) {
+                return;
+            }
+            onSubmit();
+            setContent('');
         }
-    }, [socket])
+    }
 
-    const onEnter = () => {
-        console.log('test')
-    };
     return (
         <div className={styles.formZone}>
             <form className={styles.form} onSubmit={(e) => {
                 e.preventDefault();
-                onSubmit(e)
+                onSubmit()
             }}>
                 <TextareaAutosize value={content} onChange={onChangeContent} onKeyDown={onEnter}
                                   placeholder="새 쪽지 작성하기"/>
@@ -98,5 +101,5 @@ export default function MessageForm({id}: Props) {
                 </button>
             </form>
         </div>
-    )
+    );
 }
