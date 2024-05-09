@@ -8,6 +8,7 @@ import {getUserServer} from "@/app/(afterLogin)/[username]/_lib/getUserServer";
 import {auth} from "@/auth";
 import {QueryClient} from "@tanstack/react-query";
 import UserInfo from "@/app/(afterLogin)/messages/[room]/_component/UserInfo";
+import MessageList from "@/app/(afterLogin)/messages/[room]/_component/MessageList";
 
 dayjs.locale('ko');
 dayjs.extend(relativeTime)
@@ -33,29 +34,7 @@ export default async function ChatRoom({params}: Props) {
     return (
         <main className={styles.main}>
             <UserInfo id={ids[0]}/>
-            <div className={styles.list}>
-                {messages.map((m) => {
-                    if (m.id === 'zerohch0') { // 내 메시지면
-                        return (
-                            <div
-                                key={m.messageId}
-                                className={cx(styles.message, styles.myMessage)}>
-                                <div className={styles.content}>{m.content}</div>
-                                <div
-                                    className={styles.date}>{dayjs(m.createdAt).format('YYYY년 MM월 DD일 A HH시 mm분')}</div>
-                            </div>
-                        );
-                    }
-                    return (
-                        <div
-                            key={m.messageId}
-                            className={cx(styles.message, styles.yourMessage)}>
-                            <div className={styles.content}>{m.content}</div>
-                            <div className={styles.date}>{dayjs(m.createdAt).format('YYYY년 MM월 DD일 A HH시 mm분')}</div>
-                        </div>
-                    );
-                })}
-            </div>
+            <MessageList id={ids[0]}/>
             <MessageForm id={ids[0]}/>
         </main>
     )

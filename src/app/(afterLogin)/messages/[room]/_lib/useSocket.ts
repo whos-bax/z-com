@@ -18,18 +18,23 @@ export default function useSocket(): [Socket | null, () => void] {
             socket = io(`${process.env.NEXT_PUBLIC_BASE_URL}/messages`, {
                 transports: ['websocket']
             })
-            socket.on('connect', () => {
-                console.log('websocket connected', socket, session?.user?.email);
-                if (session?.user?.email) {
-                    socket?.emit('login', {id: session?.user?.email});
-                }
-            })
             socket.on('connect_error', (err) => {
                 console.error(err);
                 console.log(`connect_error due to ${err.message}`);
             })
         }
     }, [session])
+
+    useEffect(() => {
+        if (socket?.connected && session?.user?.email) {
+            socket.on('connect', () => {
+                // console.log('websocket connected', socket, session?.user?.email);
+                // if (session?.user?.email) {
+                socket?.emit('login', {id: session?.user?.email});
+                // }
+            })
+        }
+    }, [session]);
 
     return [socket, disconnect];
 }

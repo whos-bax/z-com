@@ -20,7 +20,7 @@ export default function Room({room}: Props) {
 
     const onClick = () => {
         // router.push(`/messages/${user.Messages.at(-1)?.roomId}`);
-        router.push(`/message/${room.room}`)
+        router.push(`/messages/${room.room}`)
     };
 
     return (
@@ -36,9 +36,9 @@ export default function Room({room}: Props) {
                     &nbsp;
                     ·
                     &nbsp;
-                    <p className={styles.postDate}>
+                    <span className={styles.postDate}>
                         {dayjs(room.createdAt).fromNow(true)}
-                    </p>
+                    </span>
                 </div>
                 <div className={styles.roomLastChat}>
                     {room.content}
