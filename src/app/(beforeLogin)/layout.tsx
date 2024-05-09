@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
-import styles from '@/app/(beforeLogin)/_component/main.module.css';
+// import styles from '@/app/(beforeLogin)/_component/main.module.css';
+import * as styles from '@/app/(beforeLogin)/_component/main.css';
 
 type Props = {
     children: ReactNode;
